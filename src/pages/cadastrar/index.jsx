@@ -133,6 +133,6 @@ import './index.css';
             <Rodape />
         </div>
     )
-}
+
 
 export default Cadastrar;

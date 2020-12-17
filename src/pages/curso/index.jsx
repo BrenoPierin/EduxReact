@@ -54,7 +54,8 @@ const CursoList = () => {
      
      const curso = {
         titulo : titulo,
-        idInstituicao : idInstituicao
+        idInstituicao : idInstituicao,
+        id: id
     } 
      return(<div>
             
