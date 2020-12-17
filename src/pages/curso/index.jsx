@@ -10,7 +10,7 @@ const CursoList = () => {
     const [id, setId] = useState(0);
     const [titulo, setTitulo] = useState('');
     const [idInstituicao, setIdInstituicao] = useState('');
-    const [cursos, setCurso] = useState([]);
+    const [ cursos, setCurso] = useState([]);
     const [instituicao, setInstituicao] = useState([]);
     
     useEffect(() => {
@@ -94,6 +94,7 @@ const CursoList = () => {
                                     })}</td>
                                     </tr>
                                 )
+                                })
                             }
                         </tbody>
                     </Table>
