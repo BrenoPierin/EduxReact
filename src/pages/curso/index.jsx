@@ -42,7 +42,7 @@ const CursoList = () => {
         })
         .catch(err => console.error(err));
      }
-     
+
      //Metodo para limpar o campo do formulario após o professor ter salvo um curso
      const limparCampo = () =>{
             setId(0);
