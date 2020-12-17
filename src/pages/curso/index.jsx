@@ -51,7 +51,11 @@ const CursoList = () => {
      }
      
      //Metodo para adicionar um curso
- 
+     
+     const curso = {
+        titulo : titulo,
+        idInstituicao : idInstituicao
+    } 
      return(<div>
             
         <Menu />
@@ -94,6 +98,23 @@ const CursoList = () => {
                                     })}</td>
                                     </tr>
                                 )
+                                })
+                            }
+                        </tbody>
+                        <tbody>
+                            {
+                                cursos.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+
+                                        <td>{item.título}</td>
+                                        <td>{item.idInstituicao =  IdInstituicao.map((item, index) => {
+                                        return (
+                                            <option key={index} value={item.IdInstituicao}>{item.nome}</option>
+                                        )    
+                                    })}</td>
+                                    </tr>
+                                )    
                                 })
                             }
                         </tbody>

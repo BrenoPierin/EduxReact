@@ -3,7 +3,7 @@ import logo_2 from '../../assests/img/logo_2.png';
 import {url} from '../../assests/constants';
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
-import { Form, Container, Button, Card, Table } from 'react-bootstrap';
+import { Form, Container, Card, Table } from 'react-bootstrap';
 
 const TurmaList = () => {
 
@@ -28,6 +28,14 @@ const TurmaList = () => {
         })
         .catch(err => console.error(err));
      }
+     const turma = {
+        id : idTurma,
+        descricao : descricao,
+        idCurso : idCurso
+    }
+
+    let method = (idTurma === 0 ? 'POST' : 'PUT');
+    let urlRequest = (idTurma === 0 ? `${url}/Turma` :  `${url}/Turma/${idTurma}`);
 
      const listarCurso = () => {
         fetch(url + '/curso')
@@ -38,6 +46,9 @@ const TurmaList = () => {
                 console.log(data.data);
             })
             .catch(err => console.error(err));
+
+            let method = (idCurso === 0 ? 'POST' : 'PUT');
+            let urlRequest = (idCurso === 0 ? `${url}/Curso` :  `${url}/Curso/${idCurso}`);      
     }
      
      //Metodo para limpar o campo do formulario após o professor ter salvo um curso

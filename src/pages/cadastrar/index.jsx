@@ -8,20 +8,21 @@ import { useHistory } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import './index.css';
 
+    useEffect(() => {
+        Cadastrar()
+    }, []);
 
-const Cadastrar = () => {
+     const Cadastrar = () =>  {
+         const token = localStorage.getItem('token-edux')
 
-    // const RenderBtnAdm = () => {
-    //     const token = localStorage.getItem('token-edux')
-
-    //     if(jwt_decode(token).role === 'Administrador'){
-    //       return( 
-    //         <Button variant="primary" type="submit" onClick={event => event(history.push('/adm/cadastrar'))}>
-    //             Definir Adm!
-    //         </Button>
-    //       )
-    //     }
-    // }
+         if(jwt_decode(token).role === 'Administrador'){
+           return( 
+             <Button variant="primary" type="submit" onClick={event => event(history.push('/adm/cadastrar'))}>
+                 Definir Adm!
+             </Button>
+           )
+         }
+    }
     const history = useHistory();
 
     const [nome, setNome] = useState('');
