@@ -94,18 +94,6 @@ const CursoList = () => {
                                     })}</td>
                                     </tr>
                                 )
-                                id.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-    
-                                            <td>{item.titulo}</td>
-                                            <td>{item.idInstituicao =  instituicao.map((item, index) => {
-                                            return (
-                                                <option key={index} value={item.idInstituicao}>{item.nome}</option>
-                                            )
-                                        })}</td>
-                                        </tr>
-                                })
                             }
                         </tbody>
                     </Table>
