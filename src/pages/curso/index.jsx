@@ -109,7 +109,7 @@ const CursoList = () => {
                                     <tr key={index}>
 
                                         <td>{item.título}</td>
-                                        <td>{item.idInstituicao =  IdInstituicao.map((item, index) => {
+                                        <td>{item.idInstituicao =  idInstituicao.map((item, index) => {
                                         return (
                                             <option key={index} value={item.IdInstituicao}>{item.nome}</option>
                                         )    

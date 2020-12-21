@@ -11,7 +11,6 @@ const TurmaList = () => {
     const [descricao, setDescricao] = useState('');
     const [idCurso, setIdcurso] = useState('');
     const [cursos, setCursos] = useState([]);
-    const [turma, setTurma] = useState([]);
     
     useEffect(() => {
         listarTurma();
@@ -22,17 +21,12 @@ const TurmaList = () => {
         fetch(`${url}/Turma`)
         .then(response => response.json())
         .then(data => {
-            setTurma(data.data);            
+            setIdTurma(data.data);            
             limparCampo();
             console.log(data.data);
         })
         .catch(err => console.error(err));
      }
-     const turma = {
-        id : idTurma,
-        descricao : descricao,
-        idCurso : idCurso
-    }
 
     let method = (idTurma === 0 ? 'POST' : 'PUT');
     let urlRequest = (idTurma === 0 ? `${url}/Turma` :  `${url}/Turma/${idTurma}`);
@@ -90,7 +84,7 @@ const TurmaList = () => {
                         </thead>
                         <tbody>
                             {
-                                turma.map((item, index) => {
+                                idTurma.map((item, index) => {
                                 return (
                                     <tr key={index}>
 

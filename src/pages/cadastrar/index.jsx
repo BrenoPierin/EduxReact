@@ -8,28 +8,17 @@ import { useHistory } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import './index.css';
 
-    useEffect(() => {
-        Cadastrar()
-    }, []);
+    
 
-     const Cadastrar = () =>  {
-         const token = localStorage.getItem('token-edux')
 
-         if(jwt_decode(token).role === 'Administrador'){
-           return( 
-             <Button variant="primary" type="submit" onClick={event => event(history.push('/adm/cadastrar'))}>
-                 Definir Adm!
-             </Button>
-           )
-         }
-    }
+const Cadastrar = () => {
     const history = useHistory();
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const [idPerfil, setidPerfil] = useState(0);
-    const [perfis, setPerfis] = useState([])
+    const [idPerfil, setidPerfil] = useState('');
+    const [perfis, setPerfis] = useState([]);
 
     useEffect(() => {
         listarPerfis()
@@ -39,100 +28,83 @@ import './index.css';
         fetch(url + '/perfil')
             .then(response => response.json())
             .then(data => {
-                setPerfis(data.data);
-
+                setPerfis(data);
                 console.log(data);
-
-                limparCampos()
             })
             .catch(err => console.error(err));
     }
 
-    const limparCampos = () => {
-        setNome('');
-        setSenha('');
-        setEmail('')
-    }
-
-
     const cadastro = (event) => {
         event.preventDefault();
 
-        fetch( (url + '/Usuario') ,{
-            method : 'POST',
-            body : JSON.stringify({
-                nome  : nome,
-                email : email,
-                senha : senha,
+        fetch(`${url}/usuario`, {
+            method: 'POST',
+            body: JSON.stringify({
+                nome     : nome,
+                email    : email,
+                senha    : senha,
                 idPerfil : idPerfil
 
             }),
-            headers : {
-                'content-type' : 'application/json'
+            headers: {
+                'content-type': 'application/json'
             }
-        })
-        .then(response => {
-            if(response.ok){
-                console.log(response.json());
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Cadastro realizado com sucesso!')
+                    history.push('/login');
+                }
+            })
+    }
 
-                alert('Usuario cadastrado! Agora faça login');
-
-                history.push('/login')
-            }
-        })
-    } 
-    return(
-        <div>
+    return (
+        <div className='cordefundo'>
             <Menu />
-            <Container className='form-height' style={{marginBottom : '2em', marginTop : '2em'}}>
-                <Form className='form-signin' onSubmit={event => cadastro(event)} >
-                    <div className="text-center">
-                        <img src={logo_2} alt="Edux" style={{width : "64px"}}/>
-                    </div>
-                    <br/>
-                    <small>Informe os dados Abaixo</small>
+            <Container className='form-height' style={{ marginTop: '120px', borderRadius: '30px' }}>
+                <Form className='form-signin' onSubmit={event => cadastro(event)}>
+                <img src={logo_2}  alt="Logo EduX" />
+                    <br />
+                    <small className='tituloh2'>Informe os dados abaixo</small>
+                    <hr />
+                    <Form.Group controlId="formBasicNome">
+                        <Form.Label>Nome</Form.Label>
+                        <Form.Control type="text" placeholder="Informe o nome" value={nome} onChange={event => setNome(event.target.value)} required />
+                    </Form.Group>
 
-                        <Form.Group controlId="formBasicName">
-                            <Form.Label>Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Informe o seu nome" value={nome} onChange={event => setNome(event.target.value)} required />
-                        </Form.Group>
-                    
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" placeholder="Informe o email" value={email} onChange={event => setEmail(event.target.value)} required />
-                        </Form.Group>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" placeholder="Informe o email" value={email} onChange={event => setEmail(event.target.value)} required />
+                    </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Senha</Form.Label>
-                            <Form.Control type="password" placeholder="Informe a senha" value={senha} onChange={event => setSenha(event.target.value)} required />
-                        </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Senha</Form.Label>
+                        <Form.Control type="password" placeholder="Informe a senha" value={senha} onChange={event => setSenha(event.target.value)}required />
+                    </Form.Group>
 
-
-                        <Form.Group controlId="formBasicPerfil">
+                    <Form.Group controlId="formBasicPerfil">
                         <Form.Label>Tipo de usuário</Form.Label>
-                        <Form.Control as="select" type="text" placeholder="Informe o tipo de usuário" value={idPerfil} onChange={event => setidPerfil(parseInt(event.target.value))} >
+                        <Form.Control as="select" type="text" placeholder="Informe o tipo de usuário" value={idPerfil} onChange={event => setidPerfil(event.target.value)} >
                             {
                                 perfis.map((item, index) => {
                                     return(
-                                        <option key={item.idPerfil.parseInt} value={item.idPerfil}>{item.permissao}</option>
+                                        <option key={index} value={item.idPerfil}>{item.permissao}</option>
                                     )
                                 })
                             }
                         </Form.Control>
-                        </Form.Group>
+                    </Form.Group>
 
-
-                        <Button variant="primary" type="submit">
-                            Enviar
-                        </Button>
-                        {/* { RenderBtnAdm() } */}
-                        <br/><br/>
-                        <a href="/login" style={{marginTop: '30px'}}>Já tenho conta!</a>
+                    <Button variant="primary" type="submit">
+                        Enviar
+                    </Button>
+                    <br /><br />
+                    <a href="/login" style={{ marginTop: '30px' }}>Já tenho conta!</a>
                 </Form>
             </Container>
             <Rodape />
         </div>
     )
-
+}
 
 export default Cadastrar;

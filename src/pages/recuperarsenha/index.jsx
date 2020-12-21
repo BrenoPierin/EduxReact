@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import {url} from '../../assests/constants'
 import './index.css';
 import jwt_decode from 'jwt-decode';
+import { Alert } from 'bootstrap';
 
 
 const Login = () => {
@@ -71,7 +72,9 @@ const Login = () => {
                             <Form.Control type="email" placeholder="Informe o email para contato:" value={email} onChange={event => setEmail(event.target.value)} required />
                         </Form.Group>
                         <Button variant="primary" type="submit" style={{marginLeft: '115px'}}>
-                            Enviar
+                            
+                                Enviar
+                            <Alert>Um email para contato foi enviado</Alert>
                         </Button>
                         <br/><br/>
                         <a href="/login" style={{marginTop: '30px', marginLeft: '73px'}}>Já tenho uma conta!</a>

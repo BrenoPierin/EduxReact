@@ -63,6 +63,7 @@ const Home = () =>{
                     </Col>
                     <Col>
                         <Card style={{ width: '18rem' }}>              
+                        <Card.Img variant="top" src="https://www.2em1consultoria.com.br/wp-content/uploads/2020/04/download.jpg" />
                             <Card.Body>
                                 <Card.Title>Inovação</Card.Title>
                                 <Card.Text>
